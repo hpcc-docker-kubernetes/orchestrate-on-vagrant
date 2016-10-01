@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: thor-rc
+spec:
+  replicas: 1
+  selector:
+    app: thor
+  template:
+    metadata:
+      labels:
+        app: thor
+    spec:
+      containers:
+        - name: thor
+          image: "hpccsystems/platform-ce:latest"
+          securityContext:
+            privileged: true
+          command:
+            - /tmp/start_hpcc.sh

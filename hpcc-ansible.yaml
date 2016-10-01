@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hpcc-ansible
+  labels:
+    app: hpcc-ansible
+spec:  # specification of the pod’s contents
+  restartPolicy: Never
+  containers:
+    - name: hpcc-ansible
+      image: "hpccsystems/ansible-ce:latest"
+      command:
+        - /opt/hpcc-tools/mon_ips.sh
+      securityContext:
+        privileged: true
+      stdin: true
+      tty: true
+      env:
+        - name: USE_SVR_IPS
+          value: "0"
+        - name: KUBE_PROVIDER 
+          value: "vagrant"
+        - name: RUN_PROVIDER_SCRIPT 
+          value: "1"

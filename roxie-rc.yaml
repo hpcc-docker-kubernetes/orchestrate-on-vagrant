@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: roxie-rc
+spec:
+  replicas: 1
+  selector:
+    app: roxie
+  template:
+    metadata:
+      labels:
+        app: roxie
+    spec:
+      containers:
+        - name: roxie
+          image: "hpccsystems/platform-ce:latest"
+          securityContext:
+            privileged: true
+          command:
+            - /tmp/start_hpcc.sh
